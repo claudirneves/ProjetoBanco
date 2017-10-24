@@ -10,7 +10,13 @@ package br.estacio.programacao.banco.atividade;
  * @author aluno
  */
 public class Endereco {
+
     private int id_endereco;
+    private String logradouro;
+    private String bairro;
+    private String complemento;
+    private String numero;
+    private String cep;
 
     public int getId_endereco() {
         return id_endereco;
@@ -19,11 +25,6 @@ public class Endereco {
     public void setId_endereco(int id_endereco) {
         this.id_endereco = id_endereco;
     }
-    private String logradouro;
-    private String bairro;
-    private String complemento;
-    private int numero;
-    private String cep;
 
     public String getLogradouro() {
         return logradouro;
@@ -49,11 +50,11 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -64,6 +65,5 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    
-    
+
 }
