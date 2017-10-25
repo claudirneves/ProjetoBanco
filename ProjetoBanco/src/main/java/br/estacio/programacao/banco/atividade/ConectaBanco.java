@@ -18,9 +18,9 @@ import java.util.logging.Logger;
 public class ConectaBanco {
 
     public static void main(String[] args) {
-        final String URL = "JDBC:postgresql://localhost:5432/progii-db";
+        final String URL = "jdbc:postgresql://localhost:5432/atividade_db";
         final String USUARIO =  "postgres";
-        final String SENHA = "admin";
+        final String SENHA = "estacio@123";
         Connection conexao;
         try {
             conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
