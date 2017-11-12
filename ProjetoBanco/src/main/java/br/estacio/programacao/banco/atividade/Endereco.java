@@ -66,4 +66,37 @@ public class Endereco {
         this.cep = cep;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + this.id_endereco;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Endereco other = (Endereco) obj;
+        if (this.id_endereco != other.id_endereco) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Código: " + id_endereco + " Logradouro: " + logradouro + 
+                " Bairro: " + bairro + " Complemento: " + complemento + 
+                "Número: " + numero + " CEP: " + cep;
+    }
+    
+
 }

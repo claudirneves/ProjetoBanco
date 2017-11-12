@@ -38,5 +38,36 @@ public class Usuario {
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 11 * hash + this.id_usuario;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (this.id_usuario != other.id_usuario) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Código: " + id_usuario + " Nome: " + nome + " Sobrenome: " + sobrenome;
+    }
+    
     
 }

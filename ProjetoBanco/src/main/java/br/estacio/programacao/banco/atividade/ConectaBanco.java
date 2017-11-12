@@ -5,14 +5,8 @@
  */
 package br.estacio.programacao.banco.atividade;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,25 +14,28 @@ import java.util.logging.Logger;
  */
 public class ConectaBanco {
 
-    final String URL = "jdbc:postgresql://localhost:5432/progii-db";
-    final String USUARIO = "postgres";
-    final String SENHA = "admin";
-    Connection conexao;
     Scanner entrada = new Scanner(System.in);
-
-    public void cadastroUsuario(String nome, String sobrenome) {
-
-        try {
-            conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
-            String sql = "INSERT INTO tb_usuario (nome, sobrenome)"
-                    + "VALUES(" + nome+ "," + sobrenome + ")";
-            Statement sttm = conexao.createStatement();
-            sttm.executeUpdate(sql);
-            conexao.close();
-            System.out.println("Cadastro realizado com sucesso!");
-        } catch (SQLException ex) {
-            Logger.getLogger(ConectaBanco.class.getName()).log(Level.SEVERE, null, ex);
+    
+    public void cadastrarUsuario(String nome, String sobrenome){
+        Usuario usuario = new Usuario();
+        DAOUsuario dao = new DAOUsuario();
+        usuario.setNome(nome);
+        usuario.setSobrenome(sobrenome);
+        dao.salvarUsuario(usuario);
+    }
+    public void listarUsuario(){
+        DAOUsuario dao = new DAOUsuario();
+        List<Usuario>lista;
+        lista = dao.listarUsuario();
+        for (Usuario usuario : lista) {
+            System.out.println(usuario.toString());
         }
+    }
+    public void alterarUsuario(String nome){
+        DAOUsuario dao = new DAOUsuario();
+        Usuario usuario = new Usuario();
+        
+        
     }
 
     public void menuCadastro() {
@@ -52,7 +49,7 @@ public class ConectaBanco {
                 nome = entrada.next();
                 System.out.print("Informe o sobrenome do usuário: ");
                 sobrenome = entrada.next();
-                cadastroUsuario(nome, sobrenome);
+                     cadastrarUsuario(nome, sobrenome);
                 break;
             case 0:
                 System.out.println("Saindo!");
@@ -63,23 +60,38 @@ public class ConectaBanco {
         }
 
     }
+    public void menuListar(){
+        int lista = -1;
+        String nome = "", sobrenome = "";
+        System.out.print("\n1 - Usuário\n2 - Endereço\n3 - Perfil\n0 - Sair\nEsolha: ");
+        lista = entrada.nextInt();
+        switch(lista){
+            case 1:
+                listarUsuario();
+            break;
+            default:
+                System.out.println("Opção inválida!");
+        }
+    }
 
     public void menuPrincipal() {
         int escolha = -1;
 
-        System.out.print("\n1 - Cadastrar\n2 - Alterar\n3 - Buscar\n4 - Excluir\n0 - Sair\nEscolha: ");
+        System.out.print("\n1 - Cadastrar\n2 - Alterar\n3 - Listar\n4 - Excluir\n0 - Sair\nEscolha: ");
         escolha = entrada.nextInt();
         switch (escolha) {
             case 1:
                 menuCadastro();
                 break;
+            case 3:
+                menuListar();
             case 0:
                 System.out.println("Saindo!");
                 break;
             default:
                 System.out.println("Escolha inválida!");
                 break;
-                    
+
         }
     }
 
